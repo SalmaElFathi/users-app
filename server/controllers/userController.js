@@ -42,5 +42,18 @@ const createUser = async (req, res) => {
     });
   }
 }; 
-
-export {createUser}
+const getAllUsers=async(req,res)=>{
+try{
+    const users=await User.find();
+    return res.status(200).json({
+        success:true,
+        users:users
+    });
+}catch(error){
+    return res.status(500).json({
+        success:false,
+        error:error
+    })
+}
+}
+export {createUser,getAllUsers}
