@@ -41,19 +41,106 @@ const createUser = async (req, res) => {
       error: error.message
     });
   }
-}; 
-const getAllUsers=async(req,res)=>{
-try{
-    const users=await User.find();
+};
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
     return res.status(200).json({
-        success:true,
-        users:users
+      success: true,
+      data: users
     });
-}catch(error){
+  } catch (error) {
     return res.status(500).json({
-        success:false,
-        error:error
+      success: false,
+      error: error.message
     })
+  }
 }
+const getUserById = async (req, res) => {
+  const { userId } = req.params
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: "user not found"
+      })
+    }
+    return res.status(200).json({
+      success: true,
+      data: user
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    })
+
+  }
 }
-export {createUser,getAllUsers}
+const deleteUser = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: "user not found"
+      })
+    }
+    
+    return res.status(200).json({
+      success: true,
+      message: 'user deleted successfully '
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+}
+const updateUser = async (req, res) => {
+  const { userId } = req.params;
+  const { name, email, age } = req.body;
+  
+  try {
+    let user = await User.findById(userId);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: "user not found"
+      });
+    }
+    
+    if (email && email !== user.email) {
+      const existingEmail = await User.findOne({ email });
+      if (existingEmail) {
+        return res.status(400).json({
+          success: false,
+          error: 'email already exists' 
+        });
+      }
+    }
+    
+    user = await User.findByIdAndUpdate(
+      userId,
+      { name, email, age },
+      { new: true, runValidators: true }
+    );
+    
+    return res.status(200).json({
+      success: true,
+      data: user,  
+      message: 'user updated successfully'
+    });
+    
+  } catch (error) {
+    return res.status(500).json({ 
+      success: false,
+      error: error.message
+    });
+  }
+};
+export { createUser, getAllUsers, getUserById, deleteUser, updateUser }
