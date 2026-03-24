@@ -42,7 +42,7 @@ export function Header() {
                    <i className='fas fa-search'> </i>
                 </button>
             </div>
-            <button onClick={() => navigate("/create")}>
+            <button className='add-button' onClick={() => navigate("/create")}>
                 <i className="fas fa-user-plus"></i>
             </button>
         </div>

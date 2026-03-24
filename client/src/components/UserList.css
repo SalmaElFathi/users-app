@@ -33,6 +33,7 @@
 
 .user-table .action .fa-trash {
     color: #ef4444; 
+    background-color:green;
 }
 
 .user-table .action i:hover {

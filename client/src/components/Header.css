@@ -34,7 +34,7 @@ li a {
     color: white;
 }
 
-button {
+.add-button {
     padding: 8px 16px;
     background-color: #007bff;
     border: none;
@@ -42,7 +42,6 @@ button {
     cursor: pointer;
     border-radius: 4px;
 }
-/* Header.css */
 .search {
     display: flex;
     gap: 8px;
@@ -69,8 +68,8 @@ button {
     background-color: #0056b3;
 }
 
-/* Style pour les liens actifs */
 .inner-container li a.active {
     font-weight: bold;
-    color: #007bff;
+    color: #589adc;
+    text-decoration: underline;
 }

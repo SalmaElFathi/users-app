@@ -1,6 +1,7 @@
+import { Link } from 'react-router';
 import './UserList.css';
 
-export function UserList({users}) {
+export function UserList({ users ,onDelete}) {
     if (users.length === 0) {
         return <div className="no-users">No users found</div>;
     }
@@ -22,9 +23,9 @@ export function UserList({users}) {
                         <td>{user.email}</td>
                         <td>{user.age}</td>
                         <td>{user.status}</td>
-                        <td class="action">
-                            <i class="fas fa-pen" ></i>
-                            <i class="fas fa-trash" ></i>
+                        <td className="action">
+                            <Link to={`/edit/${user._id}`} ><i className="fas fa-pen" ></i></Link>
+                            <button onClick={()=>onDelete(user._id)}><i className="fas fa-trash" ></i></button>
                         </td>
                     </tr>
                 ))}
