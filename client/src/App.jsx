@@ -1,11 +1,10 @@
 import {Routes,Route} from 'react-router'
-import './App.css'
-
+import {Users} from './pages/users';
 function App() {
 
   return (
     <Routes>
-        <Route index />
+        <Route index element={<Users/>}/>
     </Routes>
   )
 }
