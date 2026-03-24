@@ -10,7 +10,6 @@ export function Users() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     const fetchUsers = async () => {
         setLoading(true);
         try {
@@ -33,11 +32,9 @@ export function Users() {
             setLoading(false);
         }
     }
-
     useEffect(() => {
         fetchUsers();
     }, [search]);
-
     if (loading) return <div>Loading users...</div>;
     if (error) return <div>Error: {error}</div>;
     const onDelete = async (id) => {

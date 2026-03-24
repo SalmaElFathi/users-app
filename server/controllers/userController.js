@@ -112,7 +112,7 @@ const deleteUser = async (req, res) => {
 }
 const updateUser = async (req, res) => {
   const { userId } = req.params;
-  const { name, email, age } = req.body;
+  const { name, email, age, status} = req.body;
 
   try {
     let user = await User.findById(userId);
@@ -136,7 +136,7 @@ const updateUser = async (req, res) => {
 
     user = await User.findByIdAndUpdate(
       userId,
-      { name, email, age },
+      { name, email, age ,status},
       { new: true, runValidators: true }
     );
 
