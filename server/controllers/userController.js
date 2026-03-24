@@ -43,8 +43,18 @@ const createUser = async (req, res) => {
   }
 };
 const getAllUsers = async (req, res) => {
+  const { search } = req.query;
+  let query = {};
+  if (search && search.trim()) {
+    query = {
+      $or: [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } }
+      ]
+    };
+  }
   try {
-    const users = await User.find();
+    const users = await User.find(query).select('-password');
     return res.status(200).json({
       success: true,
       users: users
@@ -88,7 +98,7 @@ const deleteUser = async (req, res) => {
         error: "user not found"
       })
     }
-    
+
     return res.status(200).json({
       success: true,
       message: 'user deleted successfully '
@@ -103,41 +113,41 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { userId } = req.params;
   const { name, email, age } = req.body;
-  
+
   try {
     let user = await User.findById(userId);
-    
+
     if (!user) {
       return res.status(404).json({
         success: false,
         error: "user not found"
       });
     }
-    
+
     if (email && email !== user.email) {
       const existingEmail = await User.findOne({ email });
       if (existingEmail) {
         return res.status(400).json({
           success: false,
-          error: 'email already exists' 
+          error: 'email already exists'
         });
       }
     }
-    
+
     user = await User.findByIdAndUpdate(
       userId,
       { name, email, age },
       { new: true, runValidators: true }
     );
-    
+
     return res.status(200).json({
       success: true,
-      user: user,  
+      user: user,
       message: 'user updated successfully'
     });
-    
+
   } catch (error) {
-    return res.status(500).json({ 
+    return res.status(500).json({
       success: false,
       error: error.message
     });

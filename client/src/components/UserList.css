@@ -14,3 +14,27 @@
     border-collapse: collapse; 
     width: 100%;
 }
+
+.user-table .action {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.user-table .action i {
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.user-table .action .fa-pen {
+    color: #3b82f6;
+}
+
+.user-table .action .fa-trash {
+    color: #ef4444; 
+}
+
+.user-table .action i:hover {
+    transform: scale(1.1);
+}

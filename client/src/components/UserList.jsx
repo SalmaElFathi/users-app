@@ -23,8 +23,8 @@ export function UserList({users}) {
                         <td>{user.age}</td>
                         <td>{user.status}</td>
                         <td class="action">
-                            <i class="fas fa-pen" style={{color:'green'}}></i>
-                            <i class="fas fa-trash" style={{color:'red'}}></i>
+                            <i class="fas fa-pen" ></i>
+                            <i class="fas fa-trash" ></i>
                         </td>
                     </tr>
                 ))}

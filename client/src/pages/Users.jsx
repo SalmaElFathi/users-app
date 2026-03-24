@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import axios from 'axios';
 import { UserList } from "../components/UserList";
 import { Header } from "../components/Header";
 
 export function Users() {
+    const [searchParams]=useSearchParams();
+    const search=searchParams.get('search')||'';
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const fetchUsers = async () => {
+        setLoading(true);
         try {
-            const response = await axios.get('/api/users');
+            const url=search?`/api/users?search=${search}`:'/api/users';
+            const response = await axios.get(url);
             console.log('response ' + response.data.users);
             if (response.data.success) {
                 setUsers(response.data.users);
@@ -31,7 +36,7 @@ export function Users() {
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [search]);
 
     if (loading) return <div>Loading users...</div>;
     if (error) return <div>Error: {error}</div>;
