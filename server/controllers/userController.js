@@ -47,7 +47,7 @@ const getAllUsers = async (req, res) => {
     const users = await User.find();
     return res.status(200).json({
       success: true,
-      data: users
+      users: users
     });
   } catch (error) {
     return res.status(500).json({
@@ -68,7 +68,7 @@ const getUserById = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      data: user
+      user: user
     })
   } catch (error) {
     return res.status(500).json({
@@ -132,7 +132,7 @@ const updateUser = async (req, res) => {
     
     return res.status(200).json({
       success: true,
-      data: user,  
+      user: user,  
       message: 'user updated successfully'
     });
     

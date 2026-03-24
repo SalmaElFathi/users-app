@@ -1,0 +1,16 @@
+.user-table{
+    margin-top:90px;
+    padding: 20px;
+    width:95%;
+    border:solid 1px white;
+
+}
+.user-table td,.user-table th {
+    border: 1px solid #ddd; 
+    padding: 12px;
+    text-align: left;
+}
+.user-table {
+    border-collapse: collapse; 
+    width: 100%;
+}
