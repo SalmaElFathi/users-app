@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import './CreateUser.css'
+import { useNavigate } from "react-router";
 export function CreateUser() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ export function CreateUser() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error,setError]=useState(null);
+    const navigate=useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,6 +27,7 @@ export function CreateUser() {
                 setAge('');
                 setPassword('');
                 setConfirmPassword('');
+                navigate('/');
             }
             else {
                 setError('passwords did not match')
